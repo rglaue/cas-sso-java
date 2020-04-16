@@ -12,6 +12,8 @@ Historical documentation, including the Java API for these libraries, is
 available in the `docs/` directory. Historical releases is available in the
 `releases/` directory.
 
+This project was originally hosted at codepin.org/project/cassso/, and later
+moved to [codepin.cait.org/project/cassso/](http://codepin.cait.org/project/cassso/)
 
 See Also: [Central Authentication Service](https://en.wikipedia.org/wiki/Central_Authentication_Service)
 
