@@ -1,0 +1,230 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <title>CAS SSO Installation: Find the Source id and name for your institution</title>
+  <link href="/css/CodePin.css" rel="styleSheet" type="text/css">
+  <link href="/css/document.css" rel="styleSheet" type="text/css">
+</head>
+
+<body>
+
+
+<div class="headerWrapper"> 
+  <div class="headerItemLeft"> 
+    <h2> 
+      <a href="/project/cassso" target="_top">CAS SSO</a> |
+      <a href="/project/cassso/documentation.html" target="_top">Documentation</a> |
+      Installation
+    </h2> 
+  </div> 
+   
+  <div class="headerItemRight"> 
+    <h4> 
+      <a href="http://www.wiu.edu" target="_top">Western Illinois University</a> |
+      <a href="http://codepin.cait.org" target="_top">CodePin.org</a> 
+    </h4> 
+  </div> 
+</div> 
+ 
+ 
+<br clear="all"> 
+<hr size="1"> 
+<br clear="all"> 
+ 
+<div class="sideBarWrapper"> 
+  <div class="sideBarHeader"> 
+    <strong><a href="/project/cassso/">CAS SSO Project</a></strong> 
+  </div> 
+  <div class="sideBarBody"> 
+    <ul> 
+      <li> <a href="/project/cassso/index.html#about">About</a> 
+      <li> <a href="/project/cassso/index.html#requirements">Requirements</a> 
+    </ul> 
+  </div> 
+  <div class="sideBarHeader"> 
+    <strong><a href="/project/cassso/subprojects.html">CAS SSO Subprojects</a></strong> 
+  </div> 
+  <div class="sideBarBody"> 
+    <ul> 
+      <li> <a href="/project/cassso/subprojects.html#cas-client">cas-client</a> 
+      <li> <a href="/project/cassso/subprojects.html#cas-weblogic">cas-weblogic</a> 
+      <li> <a href="/project/cassso/subprojects.html#cas-blackboard">cas-blackboard</a> 
+    </ul> 
+  </div> 
+  <div class="sideBarHeader"> 
+    <strong><a href="/project/cassso/download.html">Download</a></strong> 
+  </div> 
+  <div class="sideBarBody"> 
+    <ul> 
+      <li> <a href="/project/cassso/license.html">License</a>    
+      <li> <a href="/project/cassso/download.html#dependencies">Dependencies</a> 
+      <li> <a href="/project/cassso/download.html#availability">Availability</a> 
+    </ul> 
+  </div> 
+  <div class="sideBarHeader"> 
+    <strong><a href="/project/cassso/documentation.html">Documentation</a></strong> 
+  </div> 
+  <div class="sideBarBody"> 
+    <ul> 
+      <li> <a href="/project/cassso/documentation.html#installation">Installation</a> 
+      <li> <a href="/project/cassso/documentation.html#api">Java API</a> 
+    </ul> 
+  </div> 
+  <hr size="1"> 
+  <hr size="1"> 
+  <div class="sideBarHeader"> 
+    <strong>Western Illinois University</strong> 
+  </div> 
+  <div class="sideBarBody"> 
+    <ul> 
+      <li> <a href="/project/cassso/sponsors.html#WIU">About WIU</a> 
+      <li> <a href="http://www.wiu.edu">WIU Web Site</a> 
+      <li> <a href="/project/cassso/sponsors.html#CAIT">About CAIT</a> 
+      <li> <a href="http://www.cait.org">CAIT Web Site</a> 
+    </ul> 
+  </div>
+</div>
+
+<div class="docWrapper">
+
+  <div class="navHeaderWrapper">
+    <span class="navHeaderLeft">
+        <a href="4.html">&lt;[Constructing the URLs for CAS Validation]</a>
+    </span>
+    <span class="navHeaderCenter">
+        <a href="0.html">[Table of Contents]</a>
+    </span>
+    <span class="navHeaderRight">
+        <a href="A.html">[Appendix A: WebLogic Server Dev Support]&gt;</a>
+    </span>
+  </div>
+
+  <a name="5.1"></a>
+  <h3 class="subHeading-1">Frequently Asked Questions</h3>
+
+  <a name="5.1.1"></a>
+  <p class="subHeading-2">General</p>
+
+  <a name="5.1.1.1"></a>
+  <p class="subHeading-3">What Blackboard versions is this module compatible with?</p>
+  <p>
+  <ul>
+  <li> Blackbaord 8.0.x, tested
+  <li> [Blackboard] WebCT 4.3, untested but should work.
+  <li> The module does not work with Blackboard 9.
+  </ul>
+  </p>
+
+  <a name="5.1.2"></a>
+  <p class="subHeading-2">Configuration</p>
+
+  <a name="5.1.2.1"></a>
+  <p class="subHeading-3">I see more than one source.id and source.name. How do I make sure I am using the correct ones.</p>
+  <p>
+  You are probably seeing one set for the Domain and another set for the Institution.
+  You should only use the set for the Institution.
+  This corresponds to the fact that you should be configuring the module on the Institution admin level.
+  <br>
+  Follow the instructions in the section <a href="3.html">Find the Source id and name for your institution</a>,
+  and perform both methods to find the source.id and source.name sets. The information found by executing
+  `siapi.sh` and through the Web Admin interface should be identical.
+  </p>
+
+  <a name="5.1.2.2"></a>
+  <p class="subHeading-3">There are two administrative levels, and three configuration levels, where am I configuring the module?</p>
+  <p>
+  Blackboard 8 has two system administrative levels: Server and Domain.
+  But has three configuration levels: Server, Domain and Institution.
+  <i>(There is also an Instituion Admin level, but that level is accessible from the Domain Admin super account.
+  When it is stated "system administrative levels", it is meant access by the default Blackboard super accounts.
+  There are two Blackboard super accounts: Server Admin and Domain Admin.)</i>
+  <br><br>
+  The module must be activated on all three configuration levels,
+  and configured specifically on the Institution configuration level.
+  To activate, you must log in to the Server Admin level to activate the module on the Server Configuration level.
+  Then you must logout of the Server Admin level, and login to the Domain Admin level to activate the module on the Domain Configuration level
+  as well as the Institution Configuration level.
+  <br><br>
+  If you are configuring a Default SSO Institution in Blackboard, you must login to the Domain Admin level,
+  and configure it on the Domain Configuration level.
+  This is because when a user accesses a Blackboard 8 configuration they are
+  accessing it via a configured Domain. So that is where the Default SSO
+  Institution is configured. When you access a configured Domain without
+  indication of what Institution, the Domain defaults to the Default SSO
+  Institution.
+  <br><br>
+  How to access the Institution settings configuration within a Domain Admin login session:
+  <ol>
+  <li>You login to the Domain Admin realm
+  <li>However DO NOT click on the "settings" (that is the settings for the Domain Configuration).
+  <li>FIRST click on your Institution to enter the Institution's specific configuration screen.
+  <li>Then click on the "settings" link within this Institution configuration screen.
+  </ol>
+  </p>
+
+
+  <a name="5.1.3"></a>
+  <p class="subHeading-2">Technical Implementation</p>
+
+  <a name="5.1.3.1"></a>
+  <p class="subHeading-3">I am receiving a "BAD_CERTIFICATE" error in the logs when the module attempts to validate a CAS ticket.</p>
+  <p>
+  The CAS SSO Module is unable to connect to a CAS Server via SSL to validate
+  tickets if the CAS Server is using a wildcard SSL Certificate. This is a
+  SSL Certificate with a common name like '*.domain.com'.
+  <br>
+  When the module attempts a connection like this, the following error occurs:
+  <br>
+  <pre> javax.net.ssl.SSLKeyException: FATAL Alert:BAD_CERTIFICATE - A corrupt
+ or unuseable certificate was received.
+        at edu.wiu.sso.weblogicHttpsUrlRequest.urlRequest(weblogicHttpsUrlRequest.java:145)</pre>
+  The reason is due to an issue with Web Logic that has not been resolvable.
+  The the CAS Client library, used by the module, implements a NULL
+  Name Validator for the Web Logic SSL Configuration. However the SSL Context still
+  does not recognize the common name if it is a wild card.
+  <br><br>
+  The workaround, assuming your CAS Server is running on Tomcat, is to
+  configure another SSL Listen Socket to listen on another port (like 8443)
+  with a self-signed SSL Certificate.
+  Then configure Tomcat to only allow the Blackboard servers to access this
+  SSL Listen Socket. And of course configure the CAS SSO Module's CAS Server
+  Validation URL to connect to the CAS Server at this port.
+  </p>
+
+  <a name="5.1.3.2"></a>
+  <p class="subHeading-3">I am sure I have everything configured correctly, but the module is not being activated.</p>
+  <p>
+  Perhaps you can login as the server admin in your browser, but cannot
+  activate the module via the CAS login procedure. If the module is
+  configured correctly, the issue is likely due to an
+  issue with browser cookies. You should clear out your browser cookies
+  and reattempt the CAS login procedure without logging in to Blackboard
+  with any other method.
+  </p>
+
+  <a name="5.1.3.2"></a>
+  <p class="subHeading-3">We just upgraded Blackboard 8 from 8.0.x to `&gt; 8.0.x` and I can no longer login.</p>
+  <p>
+  Clear your browser cookies. This is a known issue with Blackboard 8.
+  Something changes in the Blackboard update that prevents you from being
+  able to login to Blackboard if you have cookies in your browser from
+  a previous session before Blackboard was updated.
+  </p>
+
+<br clear="all"> 
+ 
+ 
+<div class="footerWrapper">
+<hr size="1" /> 
+<address class="copyright"> 
+<a href="http://codepin.cait.org">CodePin.org</a>,
+&copy; 2011
+<a href="http://www.cait.org">Center for the Application of Information Technologies</a>,
+<a href="http://www.wiu.edu">Western Illinois University</a> 
+</address>
+</div>
+
+</body>
+</html>

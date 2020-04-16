@@ -1,0 +1,527 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <title>CAS SSO Installation: Installing the CAS SSO Module</title>
+  <link href="/css/CodePin.css" rel="styleSheet" type="text/css">
+  <link href="/css/document.css" rel="styleSheet" type="text/css">
+</head>
+
+<body>
+
+
+<div class="headerWrapper"> 
+  <div class="headerItemLeft"> 
+    <h2> 
+      <a href="/project/cassso" target="_top">CAS SSO</a> |
+      <a href="/project/cassso/documentation.html" target="_top">Documentation</a> |
+      Installation
+    </h2> 
+  </div> 
+   
+  <div class="headerItemRight"> 
+    <h4> 
+      <a href="http://www.wiu.edu" target="_top">Western Illinois University</a> |
+      <a href="http://codepin.cait.org" target="_top">CodePin.org</a> 
+    </h4> 
+  </div> 
+</div> 
+ 
+ 
+<br clear="all"> 
+<hr size="1"> 
+<br clear="all"> 
+ 
+<div class="sideBarWrapper"> 
+  <div class="sideBarHeader"> 
+    <strong><a href="/project/cassso/">CAS SSO Project</a></strong> 
+  </div> 
+  <div class="sideBarBody"> 
+    <ul> 
+      <li> <a href="/project/cassso/index.html#about">About</a> 
+      <li> <a href="/project/cassso/index.html#requirements">Requirements</a> 
+    </ul> 
+  </div> 
+  <div class="sideBarHeader"> 
+    <strong><a href="/project/cassso/subprojects.html">CAS SSO Subprojects</a></strong> 
+  </div> 
+  <div class="sideBarBody"> 
+    <ul> 
+      <li> <a href="/project/cassso/subprojects.html#cas-client">cas-client</a> 
+      <li> <a href="/project/cassso/subprojects.html#cas-weblogic">cas-weblogic</a> 
+      <li> <a href="/project/cassso/subprojects.html#cas-blackboard">cas-blackboard</a> 
+    </ul> 
+  </div> 
+  <div class="sideBarHeader"> 
+    <strong><a href="/project/cassso/download.html">Download</a></strong> 
+  </div> 
+  <div class="sideBarBody"> 
+    <ul> 
+      <li> <a href="/project/cassso/license.html">License</a>    
+      <li> <a href="/project/cassso/download.html#dependencies">Dependencies</a> 
+      <li> <a href="/project/cassso/download.html#availability">Availability</a> 
+    </ul> 
+  </div> 
+  <div class="sideBarHeader"> 
+    <strong><a href="/project/cassso/documentation.html">Documentation</a></strong> 
+  </div> 
+  <div class="sideBarBody"> 
+    <ul> 
+      <li> <a href="/project/cassso/documentation.html#installation">Installation</a> 
+      <li> <a href="/project/cassso/documentation.html#api">Java API</a> 
+    </ul> 
+  </div> 
+  <hr size="1"> 
+  <hr size="1"> 
+  <div class="sideBarHeader"> 
+    <strong>Western Illinois University</strong> 
+  </div> 
+  <div class="sideBarBody"> 
+    <ul> 
+      <li> <a href="/project/cassso/sponsors.html#WIU">About WIU</a> 
+      <li> <a href="http://www.wiu.edu">WIU Web Site</a> 
+      <li> <a href="/project/cassso/sponsors.html#CAIT">About CAIT</a> 
+      <li> <a href="http://www.cait.org">CAIT Web Site</a> 
+    </ul> 
+  </div>
+</div>
+
+<div class="docWrapper">
+
+  <div class="navHeaderWrapper">
+    <span class="navHeaderLeft">
+        <a href="1.html">&lt;[CAS Validation and Blackboard 8]</a>
+    </span>
+    <span class="navHeaderCenter">
+        <a href="0.html">[Table of Contents]</a>
+    </span>
+    <span class="navHeaderRight">
+        <a href="3.html">[Find the Source id and name for your institution]&gt;</a>
+    </span>
+  </div>
+
+  <a name="2.1"></a>
+  <h3 class="subHeading-1">Installing the CAS SSO Module</h3>
+
+  <a name="2.1.1"></a>
+  <p class="subHeading-2">About</p>
+
+  <p>This SSO module contains its own simple CAS client library, and has no dependencies
+  on any 3rd-party libraries. Simply install the three module jar files together, and
+  installation is complete. Configuration of the module is completed within a single page
+  on the Institution level of the Web Administration interface for the module. After
+  installation and configuration is completed, the module is activated by a HTTP GET
+  request to the module's URL in a normal SSO authentication procedure.</p>
+
+  <a name="2.1.2"></a>
+  <p class="subHeading-2">Step 1: Building the Jars</p>
+
+  <p>The source code of CAS SSO Module is managed by maven. The maven project for this
+  module is comprised of three sub projects: cas-client, cas-blackboard, and
+  cas-weblogic. The code for each maven subproject will compile into its own jar file.
+  All three resulting jar files comprise the resulting CAS SSO module, and must be
+  installed together.</p>
+
+  <p>Building the three CAS SSO library jars for Blackboard as a module requires an
+  additional dependency library for the SSL NullTrustManager, which is in the BEA
+  WebLogic server library. This is the only dependency. This library already exists in
+  Blackboard's Bea WebLogic library, and is obtainable from there (The weblogic.jar file
+  is needed. Refer to &ldquo;Appendix A: WebLogic Server Dev Support&rdquo; for more
+  details). Once you have this library in place, you compile the module into a module
+  library using Maven (version 2). Issue mvn compile and mvn package . Once compiled and
+  packaged, the packaged libraries are found in the target directories of each maven sub
+  project.</p>
+
+  <p>If you do not want to use a NullTrustManager, you do not need the Bea WebLogic
+  library, and you do not need to compile the cas-weblogic sub project. To be able to
+  compile the CAS Module, which is the cas-blackboard subproject, without this library,
+  you need to change one line in the casauth method of the CASInbound (CASInbound.java)
+  class, as well as a library import.</p>
+
+  <div class="textBox">
+  <div class="textBoxBody">
+  <code><pre>// change #1 at the top in the import section
+from:import edu.wiu.sso.weblogicHttpsUrlRequest;
+to:import edu.wiu.sso.httpsUrlRequest;
+// change #2 inside the casauth method
+from:weblogicHttpsUrlRequest whuc = new weblogicHttpsUrlRequest();
+to:httpsUrlRequest whuc = new httpsUrlRequest();</pre></code>
+  </div>
+    <div class="textBoxCaption">
+      Changes needed to compile without the WebLogic library
+    </div>
+  </div>
+
+  <a name="2.1.3"></a>
+  <p class="subHeading-2">Step 2: Installing the Jar</p>
+
+  <p>Create a subdirectory named cassso under the deployablecomponents directory
+  within the Blackboard Domain Installation. Copy the three libraries to this directory.
+  If you have more than one Blackboard node, the library needs to be installed on each
+  node. Everything the module needs for deployment and use is inside these three library
+  files. Restart each blackboard node in which the module is installed into.</p>
+
+  <a name="2.1.4"></a>
+  <p class="subHeading-2">Step 3: Configuring the Audit Logging</p>
+
+  <p>If you would like to capture audit information for every attempted authorization by
+  this module, you will want to add the following additional configuration to the log4j
+  file serverconfs/log4jstartup.properties of the WebCT domain the module is installed
+  into.</p>
+
+  <div class="textBox">
+  <div class="textBoxBody">
+  <code><pre>##########
+# CAS Authentication Auditing
+log4j.category.edu.wiu.sso.cas.webct.CASInbound.audit=info,AUDIT
+log4j.appender.AUDIT=org.apache.log4j.RollingFileAppender
+log4j.appender.AUDIT.File=logs/CAS_AUDIT.log
+log4j.appender.AUDIT.MaxFileSize=10MB
+log4j.appender.AUDIT.MaxBackupIndex=20
+log4j.appender.AUDIT.Append=true
+log4j.appender.AUDIT.layout=org.apache.log4j.PatternLayout
+log4j.appender.AUDIT.layout.ConversionPattern=%m %n
+##########</pre></code>
+  </div>
+    <div class="textBoxCaption">
+      Log4j configuration for CAS SSO Module authentication auditing
+    </div>
+  </div>
+
+  <div class="textBox">
+  <div class="textBoxBody">
+  <code><pre>10.0.0.57 [Tue Feb 15 15:50:50 CST 2011] ticket="ST-723-qPQ1tsbg79x0HazgeINi-cas" auth="success" userid="jsmith" timems="834"</pre></code>
+  </div>
+    <div class="textBoxCaption">
+      Each entry in the audit log will look similar to this
+    </div>
+  </div>
+
+  <a name="2.1.5"></a>
+  <p class="subHeading-2">Step 4: Configuring the Debug Logging</p>
+
+  <p>If you would like to capture debug and log information for this module, add the
+  following configuration to the log4j file serverconfs/log4jstartup.properties of the
+  WebCT domain the module is installed into.</p>
+
+  <div class="textBox">
+  <div class="textBoxBody">
+  <code><pre>##########
+# CAS Module Debug Logging
+log4j.category.edu.wiu.sso=debug,CAS
+log4j.appender.CAS=org.apache.log4j.RollingFileAppender
+log4j.appender.CAS.File=logs/CAS_SSO.log
+log4j.appender.CAS.MaxFileSize=10MB
+log4j.appender.CAS.MaxBackupIndex=20
+log4j.appender.CAS.Append=true
+log4j.appender.CAS.layout=org.apache.log4j.PatternLayout
+log4j.appender.CAS.layout.ConversionPattern=[%-5p] %d{DATE} %c{1} %n%m%n%n
+##########</pre></code>
+  </div>
+    <div class="textBoxCaption">
+      Log4j configuration for CAS SSO Module debugging
+    </div>
+  </div>
+
+  <p><a>If you would like to capture debug and log information for the deployment,
+  activation, and invocation of this module within Blackboard, you will want to add the
+  following additional configuration to the log4j file
+  serverconfs/log4jstartup.properties of the WebCT domain the module is installed
+  into.</a></p>
+
+  <div class="textBox">
+  <div class="textBoxBody">
+  <code><pre>##########
+# deployablecomponents (deployment)
+log4j.category.com.webct.platform.coreservice.deployablecomponents=debug,DC
+log4j.appender.DC=org.apache.log4j.RollingFileAppender
+log4j.appender.DC.File=logs/BB_DC.log
+log4j.appender.DC.MaxFileSize=10MB
+log4j.appender.DC.MaxBackupIndex=20
+log4j.appender.DC.Append=true
+log4j.appender.DC.layout=org.apache.log4j.PatternLayout
+log4j.appender.DC.layout.ConversionPattern=[%-5p] %d{DATE} %c{1} %n%m%n%n
+##########
+##########
+# action (activation)
+log4j.category.com.webct.platform.coreservice.action=debug,AC
+log4j.appender.AC=org.apache.log4j.RollingFileAppender
+log4j.appender.AC.File=logs/BB_ACTION.log
+log4j.appender.AC.MaxFileSize=10MB
+log4j.appender.AC.MaxBackupIndex=20
+log4j.appender.AC.Append=true
+log4j.appender.AC.layout=org.apache.log4j.PatternLayout
+log4j.appender.AC.layout.ConversionPattern=[%-5p] %d{DATE} %c{1} %n%m%n%n
+##########
+##########
+# SSO Logging (invocation)
+log4j.category.com.webct.platform.sdk.security.authentication=debug,SSO
+log4j.category.com.webct.platform.coreservice.security.authentication=debug,SSO
+log4j.appender.SSO=org.apache.log4j.RollingFileAppender
+log4j.appender.SSO.File=logs/BB_SSO.log
+log4j.appender.SSO.MaxFileSize=10MB
+log4j.appender.SSO.MaxBackupIndex=20
+log4j.appender.SSO.Append=true
+log4j.appender.SSO.layout=org.apache.log4j.PatternLayout
+log4j.appender.SSO.layout.ConversionPattern=[%-5p] %d{DATE} %c{1} %n%m%n%n
+##########</pre></code>
+  </div>
+    <div class="textBoxCaption">
+      Log4j configuration for deployment, activation, and invocation of the CAS SSO Module
+    </div>
+  </div>
+
+  <a name="2.1.6"></a>
+  <p class="subHeading-2">Step 5: Configuring the SSL Trust in the Bea Weblogic server</p>
+
+  <p>When the Blackboard CAS SSO module connects to the CAS Server to validate a ticket
+  (outside the user's communication channel), the CAS SSO module will make a direct
+  connection. If the module is configured to connect to the CAS Server via SSL (e.g.
+  <code>https://cas-server.your-domain.com/serviceValidate</code> for CAS 2.0), the SSL Certificate
+  would typically need to be issued by a trusted Certificate Authority (CA).</p>
+
+  <p>However, you do not need to configure the SSL Trust in the Bea WebLogic server
+  because the CAS SSO module can be configured to use a Bea WebLogic Nulled Trust Manager.
+  This is, it does not check the SSL Certificate Issuing Authority to determine if it is
+  a trusted Certificate Authority (CA). So you can skip this step if you will use the Bea
+  WebLogic Nulled Trust Manager by configuring the module's CAS Server SSL/TLS Certificate
+  Trust to be <code>Trust all SSL Certificates</code> on the module's configuration page in
+  Blackboard.</p>
+
+  <p>However, if you desire to have the function of checking the SSL Authority, the
+  module can use a regular SSL Trust Manager by configuring the module's CAS Server
+  SSL/TLS Certificate Trust to be <code>Require a Trusted SSL Certificate</code> on the module's
+  configuration page in Blackboard. With this, if you are using a self-signed
+  certificate, or a SSL certificate issued by any non-trusted Certificate Authority (CA),
+  you will need to import the SSL Certificate Authority (CA) chain into the Bea WebLogic
+  server so that the SSL Trust Manager will trust the CAS Server's SSL Certificate.</p>
+
+  <p>To do this, you will first need to add the Certificate Authority (CA) to an existing
+  keystore or create a new one using the keytool that is bundled with the JDK.
+  Information on how to use keytool to work with a keystore can be found here:
+  <br>
+  <ul>
+    <li>
+  Solaris/Linux:
+  <a href="http://download.oracle.com/javase/6/docs/technotes/tools/solaris/keytool.html">
+  http://download.oracle.com/javase/6/docs/technotes/tools/solaris/keytool.html</a>
+    </li>
+    <li>
+  Windows:
+  <a href="http://download.oracle.com/javase/6/docs/technotes/tools/windows/keytool.html">
+  http://download.oracle.com/javase/6/docs/technotes/tools/windows/keytool.html</a>
+    </li>
+  </ul>
+  </p>
+
+  <p>The following information is from the documentation of the predecessor of this CAS
+  SSO Module. It has not been verified as working for current systems and software named
+  in this documentation.</p>
+
+  <div class="textBox">
+  <div class="textBoxBody">
+  <p>For this documentation we will add the certificate to the keystore in the JRE
+  running BEA (This documentation is for a Linux (RHEL3) system, if you are using another
+  system you will need to modify the path accordingly).</p>
+
+  <ol>
+    <li>Place the CA certificate on to your system.</li>
+    <li>As the user that owns the JRE type: <code>bea@vista:~$ keytool -import -alias
+      internalca -file yourca.cert -keystore $JAVA_HOME/jre/lib/security/cacerts
+      -storepass changeit</code></li>
+    <li>Sign on to BEA console (example path: http://vista.whatever.edu/console/).</li>
+    <li>Click on Servers</li>
+    <li>Pick the WebctServer</li>
+    <li>Click on Keystores &amp; SSL</li>
+    <li>Click change</li>
+    <li>Chose &ldquo;Custom Identity and Java Standard Trust&rdquo;</li>
+    <li>Enter the information for you identity. If you don't have one then leave this
+      information alone (Your identity is not pertinent to CAS).</li>
+    <li>Type the password for your keystore (The default is &ldquo;changeit&rdquo;).</li>
+    <li>Continue on then finish.</li>
+  </ol>
+  </div>
+    <div class="textBoxCaption">
+      Documentation from the predecessor CAS SSO module on how to import a CA Certificate
+    </div>
+  </div>
+
+
+  <a name="2.1.7"></a>
+  <p class="subHeading-2">Step 6: Turn on the Blackboard CAS SSO Module</p>
+
+  <p>Set the option &ldquo;Allow Deployable Components&rdquo; to true, via
+  Server Admin realm</p>
+
+  <ol>
+    <li>Logon in the Server Admin role</li>
+    <li>Click on Utilities &gt; Settings</li>
+    <li>Click on System Integration &gt; Deployable Components</li>
+    <li>Make sure Allow Deployable Components is set to true</li>
+    <li>Logout as serveradmin</li>
+  </ol>
+
+  <p>Setup the Module, via Server Domain realm, on the institutional level
+
+  <ol>
+    <li>Logon in the Domain Admin role</li>
+    <li>Within the domain, Click on the Institution to setup the CAS SSO Module for</li>
+    <li>Click on Settings</li>
+    <li>Under System Integration click on CAS Inbound Module</li>
+
+      <ol>
+        <li>Enable = <code>true</code>
+          <ul>
+            <li>Setting this to true enables this module
+            </li>
+          </ul>
+        </li>
+    
+        <li>Control flag = <code>Sufficient</code>
+          <ul>
+            <li>Don't use {} on anything, this is used for the Bea JIRAA which
+              currently only supports the setting of &ldquo;Sufficient&rdquo; in
+              Blackboard.
+            </li>
+          </ul>
+        </li>
+    
+        <li>Order = <code>1</code>
+          <ul>
+            <li>Also needed for the Bea JIRAA
+            </li>
+          </ul>
+        </li>
+    
+        <li>Mode = <code>INCOMING</code>
+          <ul>
+            <li>How this module will serve requests for Blackboard
+            </li>
+          </ul>
+        </li>
+    
+        <li>URL Pattern = <code>inboundCAS</code>
+          <ul>
+            <li>This is the setting for the ss variable of the Application
+              Service URL. The module is activated when this pattern is found in the
+              requesting URL.
+            </li>
+            <li>Refer to the section: &ldquo;Constructing the URLs for CAS
+              Validation &gt; Constructing the URLs &gt; Application Service
+              URL&rdquo;
+            </li>
+          </ul>
+        </li>
+    
+        <li>CAS Server Validation URL = <code>https://cas-server.wiu.edu/cas/serviceValidate</code>
+          <ul>
+            <li>Refer to the section: &ldquo;Constructing the URLs for CAS
+              Validation &gt; Constructing the URLs &gt; CAS Server Validation
+              URL&rdquo;
+            </li>
+            <li>Only provide the base URL. The service and ticket parameters will
+              be added by the module automatically through the CAS Validation
+              process.
+            </li>
+          </ul>
+        </li>
+    
+        <li>CAS Server SSL/TLS Certificate Trust = <code>Require a Trusted SSL Certificate</code>
+          <ul>
+            <li>Set to <code>Trust all SSL Certificates</code> if you want to use the Nulled
+              Trust Manager. Refer to the previous step on configuring SSL trust.
+            </li>
+          </ul>
+        </li>
+    
+        <li>CAS Server Validation Version = <code>2.0</code>
+          <ul>
+            <li>Set this to <code>1.0</code> if you need to support the older CAS
+              protocol. Version 1.0 was the protocol supported in the predecessor module.
+              Refer to the section &ldquo;About This Module's Predecessor&rdquo; for more
+              information.
+            </li>
+          </ul>
+        </li>
+    
+        <li>Client Service Validation URL = <code>http://blackboard80.wiu.edu/webct/urw/ssinboundCAS.siURN:X-WEBCT-VISTA-V1:75d7e9fe-8f2b-de2a-0123-4567899529a7.snWebCT/cobaltMainFrame.dowebct</code>
+          <ul>
+            <li>Refer to the section: &ldquo;Constructing the URLs for CAS
+              Validation &gt; Constructing the URLs &gt; Application Service Validation
+              URL&rdquo;
+            </li>
+    
+            <li>Note: The predecessor version of this module required the ?
+              character at the end of this URL. It is not necessary in this module,
+              though you can add additional HTTP query parameters if you need (e.g.
+              ?arg=val).
+            </li>
+          </ul>
+        </li>
+    
+        <li>Redirect Error URL = <code>https://blackboard80.wiu.edu/webct/entryPageIns.dowebct?error=1</code>
+          <ul>
+            <li>If an error is encountered or the user's authentication fails, the
+              user's web browser will be redirected to this URL.
+            </li>
+          </ul>
+        </li>
+      </ol>
+  </ol>
+  </p>
+
+  <a name="2.1.8"></a>
+  <p class="subHeading-2">Known Issues</p>
+
+  <p>If your institution's sourceid.source name has a space in it (e.g. &ldquo;XXU
+  ZZZ&rdquo;) Blackboard 8.0 does not seem to want to activate the module when supplied
+  in the Client Service Validation URL. There is a work-around if you only need CAS SSO
+  authentication for one Institution. You will need to set the Institution as the Default
+  SSO Institution in the Server Admin level configuration. This will not work if you set
+  it as the Default SSO on the Server Domain level configuration.</p>
+
+  <p>Steps for this workaround include:
+      <ul>
+        <li>Logon in the Server Admin Role</li>
+        <li>Click on "Utilities &gt; Settings"</li>
+        <li>Click on "System Integration &gt; Default SSO Institution"</li>
+        <li>Enter your Institution's <code>sourceid.id</code> and <code>sourceid.source</code></li>
+        <li>For the module configuration, leave out the values for <code>.si</code> and <code>.sn</code> in the
+          URL (e.g. <code>http://blackboard80.wiu.edu/webct/urw/ssinboundCAS/cobaltMainFrame.dowebct</code>
+          instead of <code>http://blackboard80.wiu.edu/webct/urw/ssinboundCAS.siURN:X-WEBCT-VISTA-V1:75d7e9fe-8f2b-de2a-0123-4567899529a7.snXXU%20SIS/cobaltMainFrame.dowebct</code>.
+        </li>
+    
+        <li>With the <code>.si</code> and <code>.sn</code> left out, the Default SSO Institution will be
+          used instead.
+        </li>
+      </ul>
+  </p>
+
+  <a name="2.1.9"></a>
+  <p class="subHeading-2">Finishing up</p>
+
+  <p>After following these steps, the CAS SSO Module is installed into the Blackboard
+  installation. To use the module for CAS SSO Authentication, you will need to construct
+  the URL the users will access for this process. Refer to the section
+  &ldquo;Constructing the URLs for CAS Validation &gt; Constructing the URLs &gt; CAS
+  Server Login URL&rdquo; for directions.</p>
+</div>
+
+
+<br clear="all"> 
+ 
+ 
+<div class="footerWrapper">
+<hr size="1" /> 
+<address class="copyright"> 
+<a href="http://codepin.cait.org">CodePin.org</a>,
+&copy; 2011
+<a href="http://www.cait.org">Center for the Application of Information Technologies</a>,
+<a href="http://www.wiu.edu">Western Illinois University</a> 
+</address>
+</div>
+
+</body>
+</html>
+

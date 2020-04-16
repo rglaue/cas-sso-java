@@ -1,0 +1,240 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <title>CAS SSO Installation: CAS Validation and Blackboard 8</title>
+  <link href="/css/CodePin.css" rel="styleSheet" type="text/css">
+  <link href="/css/document.css" rel="styleSheet" type="text/css">
+</head>
+
+<body>
+
+<div class="headerWrapper"> 
+  <div class="headerItemLeft"> 
+    <h2> 
+      <a href="/project/cassso" target="_top">CAS SSO</a> |
+      <a href="/project/cassso/documentation.html" target="_top">Documentation</a> |
+      Installation
+    </h2> 
+  </div> 
+   
+  <div class="headerItemRight"> 
+    <h4> 
+      <a href="http://www.wiu.edu" target="_top">Western Illinois University</a> |
+      <a href="http://codepin.cait.org" target="_top">CodePin.org</a> 
+    </h4> 
+  </div> 
+</div> 
+ 
+ 
+<br clear="all"> 
+<hr size="1"> 
+<br clear="all"> 
+ 
+<div class="sideBarWrapper"> 
+  <div class="sideBarHeader"> 
+    <strong><a href="/project/cassso/">CAS SSO Project</a></strong> 
+  </div> 
+  <div class="sideBarBody"> 
+    <ul> 
+      <li> <a href="/project/cassso/index.html#about">About</a> 
+      <li> <a href="/project/cassso/index.html#requirements">Requirements</a> 
+    </ul> 
+  </div> 
+  <div class="sideBarHeader"> 
+    <strong><a href="/project/cassso/subprojects.html">CAS SSO Subprojects</a></strong> 
+  </div> 
+  <div class="sideBarBody"> 
+    <ul> 
+      <li> <a href="/project/cassso/subprojects.html#cas-client">cas-client</a> 
+      <li> <a href="/project/cassso/subprojects.html#cas-weblogic">cas-weblogic</a> 
+      <li> <a href="/project/cassso/subprojects.html#cas-blackboard">cas-blackboard</a> 
+    </ul> 
+  </div> 
+  <div class="sideBarHeader"> 
+    <strong><a href="/project/cassso/download.html">Download</a></strong> 
+  </div> 
+  <div class="sideBarBody"> 
+    <ul> 
+      <li> <a href="/project/cassso/license.html">License</a>    
+      <li> <a href="/project/cassso/download.html#dependencies">Dependencies</a> 
+      <li> <a href="/project/cassso/download.html#availability">Availability</a> 
+    </ul> 
+  </div> 
+  <div class="sideBarHeader"> 
+    <strong><a href="/project/cassso/documentation.html">Documentation</a></strong> 
+  </div> 
+  <div class="sideBarBody"> 
+    <ul> 
+      <li> <a href="/project/cassso/documentation.html#installation">Installation</a> 
+      <li> <a href="/project/cassso/documentation.html#api">Java API</a> 
+    </ul> 
+  </div> 
+  <hr size="1"> 
+  <hr size="1"> 
+  <div class="sideBarHeader"> 
+    <strong>Western Illinois University</strong> 
+  </div> 
+  <div class="sideBarBody"> 
+    <ul> 
+      <li> <a href="/project/cassso/sponsors.html#WIU">About WIU</a> 
+      <li> <a href="http://www.wiu.edu">WIU Web Site</a> 
+      <li> <a href="/project/cassso/sponsors.html#CAIT">About CAIT</a> 
+      <li> <a href="http://www.cait.org">CAIT Web Site</a> 
+    </ul> 
+  </div>
+</div>
+
+<div class="docWrapper">
+
+  <div class="navHeaderWrapper">
+    <span class="navHeaderLeft">
+        <a href="A.html">&lt;[Appendix A: WebLogic Server Dev Support]</a>
+    </span>
+    <span class="navHeaderCenter">
+        <a href="0.html">[Table of Contents]</a>
+    </span>
+    <span class="navHeaderRight">
+        <a href="2.html">[Installing the CAS SSO Module]&gt;</a>
+    </span>
+  </div>
+
+  <a name="1.1"></a>
+  <h3 class="subHeading-1">CAS Validation and Blackboard 8</h3>
+
+  <a name="1.1.1"></a>
+  <p class="subHeading-2">About</p>
+
+  <p>The CAS SSO module is a Blackboard Custom Authentication Module
+  which externalizes user authentication to a Jasig CAS server.
+  </p>
+
+  <p>The module is installed as a normal Blackboard module, 
+  activated in the Server and Domain Administration settings and configured in the
+  Institution Configuration settings. The
+  module has its own configuration page that dictates how the module interacts with the
+  CAS Server.
+  There are three configuration levels, Server, Domain and Institution.
+  It is important to follow the installation instructions
+  closely to make sure the module is configured within the correct configuration level.
+  </p>
+
+  <p>Ultimately, the module is activated when the user is redirect from the CAS
+  Server to a specially configured URL, the Blackboard Module's CAS Service URL.
+  Unlike other CAS Clients, the initial CAS Login URL must be
+  constructed by some other mechanism, such as hard-coding the URL in
+  the Blackboard homepage.
+  This is because, typically, you will want to replace the default login method of
+  the Blackboard Welcome page. And, you may want to customize this specialized
+  URL to include other HTTP GET parameters you want to send to the CAS login,
+  or you may want to include an additional Blackboard Learning Context in the
+  service URL which specifies where the user is directed to within Blackboard
+  once successfully authenticated.
+  </p>
+
+  <p>The module is utilized for authenticating a user to Blackboard against a CAS server.
+  The module is activated when the user accesses a specially configured Blackboard URL.
+  When a user requests to be authorized via this module, the user can only get into
+  Blackboard via this CAS SSO Authentication Module if they have a valid CAS Service
+  ticket. To get this ticket, the user must be redirected from the CAS server. That is
+  they go to CAS, login, and get redirected by CAS to the Blackboard CAS SSO module URL.
+  Along with the redirection are HTTP GET parameters containing information on the
+  Validation ticket. Only then can this user's CAS Service ticket be validated.</p>
+
+  <p>
+  The user should begin the login process at a custom page that redirects them
+  to the CAS Server login page with the necessary HTTP GET parameters. The
+  parameters specify the application service URL the user is directed to after
+  successfully logging in to the CAS Server. That service URL is the specially
+  configured Blackboard URL that activates the CAS SSO Auth Module.
+  If the resulting request to the CAS SSO Auth Module the user is directed to
+  from the CAS Server
+  does contain a CAS Service ticket, then the module creates a direct HTTP
+  connection to the CAS server to validate that ticket. If the ticket is successfully
+  validated, the module receives the user identification credentials in the CAS server
+  validation response which is used to log the user into Blackboard.</p>
+
+  <p>If the user attempts to access the CAS SSO Auth Module directly and does
+  not have a CAS Auth Ticket in their HTTP GET parameters, The Blackboard CAS
+  Auth Module will redirect the user to either the default Welcome page or an
+  error page. This is also true if the CAS Auth Ticket is invalid or expired.
+  The error page the user is directed to is configurable in the CAS SSO Auth
+  Module configuration page.</p>
+
+  <div class="textBox">
+  <div class="textBoxBody">
+    <center>
+    <img src="WebvtVistaCASValidationTimeline-2.png" width="85%">
+    </center>
+  </div>
+    <div class="textBoxCaption">
+      CAS Login, Ticket Validation, and Blackboard Login timeline procession of events.
+    </div>
+  </div>
+
+  <a name="1.1.2"></a>
+  <p class="subHeading-2">About this Module's Predecessor</p>
+
+  <p>This CAS SSO Module for Blackboard 8+ is intended to replace the previous CAS SSO
+  Module for WebCT Vista 4+ once made available at http://devnet.webct.com, and later
+  moved in 2007 to OSCELOT FORGE at <a href="http://projects.oscelot.org/gf/project/wct-cas">http://projects.oscelot.org/gf/project/wct-cas</a> ,
+  navigatable to <code>&ldquo;Home &raquo; Projects &raquo; WebCT CE/Vista CAS SSO
+  Module&rdquo;</code>.</p>
+
+  <p>The predecessor was written by Mark Wilcox, a WebCT employee, in 2004. It only
+  supports CAS 1.0 protocol. Its package is identified as: com.webct.sso.cas .</p>
+
+  <a name="1.1.3"></a>
+  <p class="subHeading-2">About this Superseding Module</p>
+
+  <p>This module is a complete rewrite of its predecessor. It is a complete Maven 2
+  project with the following features:</p>
+
+  <ol>
+    <li>Supports CAS 2.0 and CAS 1.0 protocols. This is configurable via the module's
+      configuration page in Blackboard.
+    </li>
+
+    <li>Supports a Nulled Trust Manager configuration. This is, SSL Cert CA Trust can be
+      turned off or on via the module's configuration page in Blackboard.
+    </li>
+
+    <li>The module libraries can be compiled without WebLogic library dependencies,
+      and used in Blackboard (without the Nulled Trust Manager though). The predecessor
+      require the WebLogic library for compilation.
+    </li>
+
+    <li>Has more debugging output
+    </li>
+
+    <li>Provides for audit logging via Blackboard's Log4j configuration.
+    </li>
+  </ol>
+
+  <p>The creation of the Blackboard 8.0 CAS SSO Authentication module was undertaken by
+  <a href="http://www.wiu.edu">Western Illinois University</a> . It was written by Russell E Glaue,
+  an employee of <a href="http://www.wiu.edu">Western Illinois University</a> in the 
+  <a href="http://www.cait.org">Center for the Application of Information Technologies</a>,
+  a Center at the University. This module is distributed and supported by the
+  <a href="http://www.wiu.edu">Western Illinois University</a>
+  <a href="http://www.wiu.edu/utech">uTech</a> division.</p>
+</div>
+
+
+<br clear="all"> 
+ 
+ 
+<div class="footerWrapper">
+<hr size="1" /> 
+<address class="copyright"> 
+<a href="http://codepin.cait.org">CodePin.org</a>,
+&copy; 2011
+<a href="http://www.cait.org">Center for the Application of Information Technologies</a>,
+<a href="http://www.wiu.edu">Western Illinois University</a> 
+</address>
+</div>
+
+</body>
+</html>
+

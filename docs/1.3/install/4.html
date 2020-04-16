@@ -1,0 +1,443 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <title>CAS SSO Installation: Constructing the URLs for CAS Validation</title>
+  <link href="/css/CodePin.css" rel="styleSheet" type="text/css">
+  <link href="/css/document.css" rel="styleSheet" type="text/css">
+</head>
+
+<body>
+
+
+<div class="headerWrapper"> 
+  <div class="headerItemLeft"> 
+    <h2> 
+      <a href="/project/cassso" target="_top">CAS SSO</a> |
+      <a href="/project/cassso/documentation.html" target="_top">Documentation</a> |
+      Installation
+    </h2> 
+  </div> 
+   
+  <div class="headerItemRight"> 
+    <h4> 
+      <a href="http://www.wiu.edu" target="_top">Western Illinois University</a> |
+      <a href="http://codepin.cait.org" target="_top">CodePin.org</a> 
+    </h4> 
+  </div> 
+</div> 
+ 
+ 
+<br clear="all"> 
+<hr size="1"> 
+<br clear="all"> 
+ 
+<div class="sideBarWrapper"> 
+  <div class="sideBarHeader"> 
+    <strong><a href="/project/cassso/">CAS SSO Project</a></strong> 
+  </div> 
+  <div class="sideBarBody"> 
+    <ul> 
+      <li> <a href="/project/cassso/index.html#about">About</a> 
+      <li> <a href="/project/cassso/index.html#requirements">Requirements</a> 
+    </ul> 
+  </div> 
+  <div class="sideBarHeader"> 
+    <strong><a href="/project/cassso/subprojects.html">CAS SSO Subprojects</a></strong> 
+  </div> 
+  <div class="sideBarBody"> 
+    <ul> 
+      <li> <a href="/project/cassso/subprojects.html#cas-client">cas-client</a> 
+      <li> <a href="/project/cassso/subprojects.html#cas-weblogic">cas-weblogic</a> 
+      <li> <a href="/project/cassso/subprojects.html#cas-blackboard">cas-blackboard</a> 
+    </ul> 
+  </div> 
+  <div class="sideBarHeader"> 
+    <strong><a href="/project/cassso/download.html">Download</a></strong> 
+  </div> 
+  <div class="sideBarBody"> 
+    <ul> 
+      <li> <a href="/project/cassso/license.html">License</a>    
+      <li> <a href="/project/cassso/download.html#dependencies">Dependencies</a> 
+      <li> <a href="/project/cassso/download.html#availability">Availability</a> 
+    </ul> 
+  </div> 
+  <div class="sideBarHeader"> 
+    <strong><a href="/project/cassso/documentation.html">Documentation</a></strong> 
+  </div> 
+  <div class="sideBarBody"> 
+    <ul> 
+      <li> <a href="/project/cassso/documentation.html#installation">Installation</a> 
+      <li> <a href="/project/cassso/documentation.html#api">Java API</a> 
+    </ul> 
+  </div> 
+  <hr size="1"> 
+  <hr size="1"> 
+  <div class="sideBarHeader"> 
+    <strong>Western Illinois University</strong> 
+  </div> 
+  <div class="sideBarBody"> 
+    <ul> 
+      <li> <a href="/project/cassso/sponsors.html#WIU">About WIU</a> 
+      <li> <a href="http://www.wiu.edu">WIU Web Site</a> 
+      <li> <a href="/project/cassso/sponsors.html#CAIT">About CAIT</a> 
+      <li> <a href="http://www.cait.org">CAIT Web Site</a> 
+    </ul> 
+  </div>
+</div>
+
+<div class="docWrapper">
+
+  <div class="navHeaderWrapper">
+    <span class="navHeaderLeft">
+        <a href="3.html">&lt;[Find the Source id and name for your institution]</a>
+    </span>
+    <span class="navHeaderCenter">
+        <a href="0.html">[Table of Contents]</a>
+    </span>
+    <span class="navHeaderRight">
+        <a href="5.html">[Frequently Asked Questions]&gt;</a>
+    </span>
+  </div>
+
+  <a name="4.1"></a>
+  <h3 class="subHeading-1">Constructing the URLs for CAS Validation</h3>
+
+  <a name="4.1.1"></a>
+  <p class="subHeading-2">About</p>
+
+  <p>The URLs for the CAS Validation process are used to redirect the user's web browser
+  to the CAS server to obtain a Service Ticket. If the user has not logged in to the CAS
+  server yet, the server will ask them to login before returning (redirecting) the user's
+  web browser to this module with the Service Ticket. Once this module receives the
+  Service Ticket from the CAS server via the returning redirected user web browser, this
+  module then initiates the CAS Ticket Validation process in a HTTP connection
+  outside the web user's communication channel, directly with the CAS server itself. The
+  CAS Validation process requires both a Service Ticket and a Service URL in order for
+  the validation to be successful.</p>
+
+  <a name="4.1.2"></a>
+  <p class="subHeading-2">Constructing the URLs</p>
+
+  <p>Three URLs are required for configuration: The Application Service URL (which
+  activates this module), the CAS Server Login URL which authenticates the user and
+  requires the previous Application Service URL in an encoded format as a HTTP query
+  parameter, and the CAS Server Validation URL that will validate the CAS Service Ticket
+  and also requires the Application Service URL in an encoded format as a HTTP query
+  parameter.</p>
+
+  <a name="4.1.2.1"></a>
+  <p class="subHeading-3">Application Service URL:</p>
+
+  <p>
+  <code>
+  https://blackboard80.wiu.edu/webct/urw/ssinboundCAS.siURN:X-WEBCT-VISTA-V1:82f26bfe-8f2b-de2b-01b0-4fbfffccc4b2.snWebCT/cobaltMainFrame.dowebct
+  </code>
+
+  <ul>
+    <li>The Service URL is the URL of the service that is handling the users
+      authentication process with the CAS server. This URL must be the one that initiates
+      the CAS authentication process, receives the reponse, and validates the CAS
+      Validation Ticket.
+    </li>
+
+    <li><code>ss</code> <code>inboundCAS</code>
+      <ul>
+        <li>The URL pattern which activates the module when encountered by
+          Blackboard
+        </li>
+      </ul>
+    </li>
+
+    <li><code>.si</code> <code>URN:X-WEBCT-VISTA-V1:82f26bfe-8f2b-de2b-01b0-4fbfffccc4b2</code>
+      <ul>
+        <li>The serviceid.id of the Institution the user is authenticated for
+        </li>
+        <li>If the serviceid.id were to contain any '.' period characters, they
+          would need to be escaped with another '.' period character (e.g.
+          &ldquo;1234.56.7890&rdquo; becomes &ldquo;1234..56..7890&rdquo;). The '.'
+          period character is reserved (used for .si and .sn) in Blackboard 8 to indicate
+          parameters inside the URL.
+        </li>
+      </ul>
+    </li>
+
+    <li><code>.sn</code> <code>WebCT</code>
+      <ul>
+        <li>The serviceid.source of the Domain the user is authenticated for
+        </li>
+      </ul>
+    </li>
+
+    <li><code>cobaltMainFrame.dowebct</code>
+      <ul>
+        <li>The start page after the user is logged in to Blackboard
+        </li>
+      </ul>
+    </li>
+
+    <li><em>
+         Note: There is no need to have the <code>?</code> character at the end
+         of this URL when configured in the Blackboard module. The module uses
+         this URL correctly with or without an appended <code>?</code>.
+         </em>
+    </li>
+  </ul>
+
+  </p>
+
+  <a name="4.1.2.2"></a>
+  <p class="subHeading-3">Encoded Application Service URL:</p>
+
+  <p>
+  <code>
+  https%3A%2F%2Fblackboard80.wiu.edu%2Fwebct%2Furw%2FssinboundCAS.siURN%3AX-WEBCT-VISTA-V1%3A82f26bfe-8f2b-de2b-01b0-4fbfffccc4b2.snWebCT%2FcobaltMainFrame.dowebct
+  </code>
+  </p>
+
+  <ul>
+    <li>The Service URL must be fully safe encoded so that it can be passed as
+      the value of a parameter of a HTTP GET request to the CAS Server, in the CAS Server
+      Login URL. There are two GET requests that occur: one to log the user in to the CAS
+      Server (Server Login) and receive back a CAS Validation Ticket, and the other to
+      validate the CAS Validation Ticket (Server Validation) and get back the user
+      authorization credentials.
+    </li>
+
+    <li><em>
+         Note: This URL should not be provided in an encoded format when
+         configuring it in the Blackboard module. The module will properly
+         encode the URL itself when inserting it as a query parameter.
+        </em>
+    </li>
+  </ul>
+
+  <a name="4.1.2.3"></a>
+  <p class="subHeading-3">CAS Server Login URL:</p>
+
+  <p>
+  <code>
+  https://cas-server.wiu.edu/login
+  </code>
+  </p>
+
+  <ul>
+    <li> The Login URL is what the web user goes to in order to be logged in
+         via CAS <b>AND</b> also be directed to the Service Application.
+    </li>
+    <li><em>
+        Note: When configuring this URL in the Blackboard module, only the base
+        URL should be provided. The module will take care of encoding the
+        Application Service URL and appending it as a query parameter.
+        </em>
+    </li>
+
+    <li>How the Login process works
+    <ul>
+    <li>Step 1 Request - from Module to Server
+
+      <ul>
+        <li>When a non-authenticated (not logged in) user first visits Blackboard
+          via the CAS SSO Authentication module, the module must validate the user with
+          CAS in order to get the authorization credentials which Blackboard uses as
+          internal user identification criteria. The CAS Server Login URL is the first
+          step (of two steps) for this process. The user is redirected to the CAS Server
+          Login URL. The user must login to CAS if not previously. The CAS Server
+          redirects the user's web browser back to the module using the value of the
+          service parameter as the redirect URL, and also sending an additional
+          parameter <code>ticket</code>.
+        </li>
+
+          <ul>
+            <li>
+              <code>
+              https://cas-server.wiu.edu/login?service=https%3A%2F%2Fblackboard80.wiu.edu%2Fwebct%2Furw%2FssinboundCAS.siURN%3AX-WEBCT-VISTA-V1%3A82f26bfe-8f2b-de2b-01b0-4fbfffccc4b2.snWebCT%2FcobaltMainFrame.dowebct
+              </code>
+            </li>
+          </ul>
+
+        <li>HTTP GET parameter: <code>service</code> (Sent to CAS Server Login)
+
+          <ul>
+            <li>The value is the Application Service URL the CAS server redirects
+              the user's web browser to with the CAS Service Ticket, after the user is
+              logged in. If already logged into the CAS Server, the user is immediately
+              redirected without a login prompt. The entire URL must be safe encoded,
+              including any query parameters like the '?' character (%3F).
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+
+    <li>Step 2 Response - from Server to Module
+
+      <ul>
+        <li>HTTP GET parameter: <code>ticket</code> (Sent from CAS Server Login to CAS SSO
+          Authentication Module)
+
+          <ul>
+            <li>
+            <code>
+            https://blackboard80.wiu.edu/webct/urw/ssinboundCAS.siURN:X-WEBCT-VISTA-V1:82f26bfe-8f2b-de2b-01b0-4fbfffccc4b2.snWebCT/cobaltMainFrame.dowebct?ticket=ST-26-3khTvbVucs3FDdC34Krc-auth
+            </code>
+            </li>
+
+            <li>The CAS Server's login procedure redirects the user's web browser
+              to this URL after the user is logged into the CAS Server SSO
+              Authentication Service.
+              Note this URL is the one previously sent as the value to the
+              <code>service</code> parameter, and includes the new
+              <code>ticket</code> query parameter which value is used by the
+              Blackboard CAS
+              SSO Authentication Module to validate the user.
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    </ul>
+    </li>
+  </ul>
+
+  <a name="4.1.2.4"></a>
+  <p class="subHeading-3">CAS Server Validation URL:</p>
+
+  <p><code>https://cas-server.wiu.edu/cas/serviceValidate</code></p>
+
+  <ul>
+    <li>When the Blackboard module receives the user redirected from the CAS
+        Login process, the redirect URL includes the <code>ticket</code>
+        parameter which needs to be validated to ensure the user is
+        authorized. The Validation URL is what the module will use to validate
+        the <code>ticket</code> with the CAS Server.
+    </li>
+
+    <li>How the Validation process works
+    <ul>
+    <li>Step 1 Request - from Module to Server
+
+      <ul>
+        <li>After the user is authenticated via the CAS Server Login and is
+          redirected back to the CAS SSO Authentication module in Blackboard with a CAS
+          Validation Ticket id, that ticket id must be validated. The CAS Server
+          Validation URL is used by the Blackboard CAS SSO Authentication Module outside
+          of the user's current communication channel to validate the ticket. The CAS
+          Server will only allow the ticket to be validated one time, and the associated
+          <code>service</code> parameter used during the CAS Server Login step must also be sent again
+          in order to have a successful validation.
+        </li>
+
+        <li>Module's HTTP GET back to the CAS Server to validate the service
+          ticket
+          <ul>
+            <li><code>https://cas-server.wiu.edu/cas/serviceValidate?service=https%3A%2F%2Fblackboard80.wiu.edu%2Fwebct%2Furw%2FssinboundCAS.siURN%3AX-WEBCT-VISTA-V1%3A82f26bfe-8f2b-de2b-01b0-4fbfffccc4b2.snWebCT%2FcobaltMainFrame.dowebct&amp;ticket=ST-26-3khTvbVucs3FDdC34Krc-auth</code>
+            </li>
+          </ul>
+        </li>
+
+        <li>HTTP GET parameter: <code>service</code> (Sent to CAS Server Validation)
+
+          <ul>
+            <li>This is the same as the service parameter in the CAS Server Login
+              procedure.
+            </li>
+
+            <li>The module will append this parameter itself during the ticket
+              validation process
+            </li>
+          </ul>
+        </li>
+
+        <li>HTTP GET parameter: <code>ticket</code> (Sent to CAS Server Validation)
+
+          <ul>
+            <li>This is the ticket id received from the response in the CAS
+              Server Login procedure.
+            </li>
+
+            <li>The module will append this parameter itself during the ticket
+              validation process
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+
+    <li>Step 2 Response - from Server to Module
+
+      <ul>
+        <li>HTTP POST results (Sent from CAS Server Validation to CAS Auth
+          Module)
+
+          <ul>
+            <li>
+            <code>
+            https://blackboard80.wiu.edu/webct/urw/ssinboundCAS.siURN:X-WEBCT-VISTA-V1:82f26bfe-8f2b-de2b-01b0-4fbfffccc4b2.snWebCT/cobaltMainFrame.dowebct
+            </code>
+            </li>
+
+            <li>This is an XML (SAML-like) response from the CAS Server that
+              provides a definitive answer on the user's authentication. Either the
+              validation process was successful and the user identification credentials
+              are provided in this response, or the validation process was not successful
+              and the response contains the explanation.
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    </ul>
+    </li>
+  </ul>
+
+  <div class="textBox">
+  <div class="textBoxBody">
+  <code><pre>&lt;cas:serviceResponse xmlns:cas='http://www.yale.edu/tp/cas'&gt;
+    &lt;cas:authenticationSuccess&gt;
+        &lt;cas:user&gt;jsmith&lt;/cas:user&gt;
+    &lt;/cas:authenticationSuccess&gt;
+&lt;/cas:serviceResponse&gt;</pre></code>
+  </div>
+  <div class="textBoxCaption">Response from a successful CAS service ticket validation</div>
+  </div>
+
+  <div class="textBox">
+  <div class="textBoxBody">
+  <code><pre>&lt;cas:serviceResponse xmlns:cas='http://www.yale.edu/tp/cas'&gt;
+    &lt;cas:authenticationFailure code="INVALID_TICKET"&gt;
+        Ticket ST-26-3khTvbVucs3FDdC34Krc-auth not recognized
+    &lt;/cas:authenticationFailure&gt;
+&lt;/cas:serviceResponse&gt;</pre></code>
+  </div>
+  <div class="textBoxCaption">Response from a failure to validate a CAS service ticket</div>
+  </div>
+
+
+  <a name="4.1.3"></a>
+  <p class="subHeading-2">See Also</p>
+
+  <p>
+  <a href="http://www.jasig.org/cas/protocol">CAS Protocol</a>
+  </p>
+
+  <p>Be sure to note the differing protocol versions. CAS 2.0 is documented here.</p>
+</div>
+
+
+<br clear="all"> 
+ 
+ 
+<div class="footerWrapper">
+<hr size="1" /> 
+<address class="copyright"> 
+<a href="http://codepin.cait.org">CodePin.org</a>,
+&copy; 2011
+<a href="http://www.cait.org">Center for the Application of Information Technologies</a>,
+<a href="http://www.wiu.edu">Western Illinois University</a> 
+</address>
+</div>
+
+</body>
+</html>

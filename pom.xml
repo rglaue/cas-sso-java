@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+                      http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>edu.wiu.sso</groupId>
+  <version>1.3</version>
+  <artifactId>sso</artifactId>
+  <packaging>pom</packaging>
+  <name>WIU's CAS SSO Library and Blackboard 8 Authentication Module</name>
+  <url>http://www.codepin.org/project/cassso</url>
+  <inceptionYear>2010</inceptionYear>
+
+  <licenses>
+    <license>
+      <name>GPL 3</name>
+      <url>http://www.gnu.org/licenses/gpl.txt</url>
+      <distribution>manual</distribution>
+      <comments>GNU General Public License version 3</comments>
+    </license>
+  </licenses>
+
+  <organization>
+    <name>Western Illinois University</name>
+    <url>http://www.wiu.edu</url>
+  </organization>
+
+  <developers>
+      <developer>
+          <id>rglaue</id>
+          <name>Russell E Glaue</name>
+          <email>re-glaue@wiu.edu</email>
+          <url>http://russ.glaue.org</url>
+          <organization>Center for the Application of Information Technologies, Western Illinois University</organization>
+          <organizationUrl>http://www.wiu.edu</organizationUrl>
+          <roles>
+              <role>project manager</role>
+              <role>architect</role>
+              <role>developer</role>
+          </roles>
+          <timezone>-5</timezone>
+      </developer>
+  </developers>
+
+  <scm>
+    <connection>scm:svn:https://dev.codepin.org/svn/cassso</connection>
+    <developerConnection>scm:svn:https://dev.codepin.org/svn/cassso</developerConnection>
+    <tag>HEAD</tag>
+    <url>https://dev.codepin.org/scm/viewvc/cassso</url>
+  </scm>
+
+  <modules>
+    <module>cas-client</module>
+    <module>cas-weblogic</module>
+    <module>cas-blackboard</module>
+  </modules>
+
+  <properties>
+    <!-- src/main/properties/<env>/application.properties is loaded for all subproject -->
+    <env>local</env>
+  </properties>
+
+  <build>
+    <plugins>
+      <plugin>
+        <artifactId>maven-site-plugin</artifactId>
+        <version>2.2</version>
+        <configuration>
+          <locales>en</locales>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-javadoc-plugin</artifactId>
+        <version>2.7</version>
+        <configuration>
+          <!-- Default configuration for all reports -->
+          <excludePackageNames>javax:com.webct:weblogic:org.apache</excludePackageNames>
+          <group>
+            <title>WIU's Single Sign On Package</title>
+            <packages>edu.wiu.sso*</packages>
+          </group>
+          <links>
+            <link>http://download.oracle.com/javase/1.5.0/docs/api/</link>
+            <link>http://download.oracle.com/javaee/5/api/</link>
+            <link>http://download.oracle.com/docs/cd/E13222_01/wls/docs92/javadocs/</link>
+            <link>http://logging.apache.org/log4j/1.2/apidocs/</link>
+            <link>http://library.blackboard.com/ref/54086399-82d8-4827-a8a2-5fc39b51a294/</link>
+          </links>
+        </configuration>
+        <executions>
+          <execution>
+            <id>aggregate</id>
+            <goals>
+              <goal>javadoc</goal>
+              <goal>aggregate</goal>
+            </goals>
+            <phase>site</phase>
+            <configuration>
+              <!-- Specific configuration for the aggregate report -->
+              <excludePackageNames>javax:com.webct:weblogic:org.apache</excludePackageNames>
+              <group>
+                <title>WIU's Single Sign On Package</title>
+                <packages>edu.wiu.sso*</packages>
+              </group>
+              <links>
+                <link>http://download.oracle.com/javase/1.5.0/docs/api/</link>
+                <link>http://download.oracle.com/javaee/5/api/</link>
+                <link>http://download.oracle.com/docs/cd/E13222_01/wls/docs92/javadocs/</link>
+                <link>http://logging.apache.org/log4j/1.2/apidocs/</link>
+              </links>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>2.0.2</version>
+        <configuration>
+          <source>1.5</source>
+          <target>1.5</target>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+
+  <reporting>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-project-info-reports-plugin</artifactId>
+        <version>2.1.1</version>
+      </plugin>
+    </plugins>
+  </reporting>
+
+</project>

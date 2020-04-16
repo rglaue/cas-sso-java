@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+                      http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+  <parent>
+    <groupId>edu.wiu.sso</groupId>
+    <artifactId>sso</artifactId>
+    <version>1.3</version>
+  </parent>
+
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>edu.wiu.sso.cas-weblogic</groupId>
+  <artifactId>cas-weblogic</artifactId>
+  <packaging>jar</packaging>
+  <version>1.3</version>
+  <name>cas-weblogic</name>
+  <url>http://www.codepin.org/project/cassso</url>
+
+  <licenses>
+    <license>
+      <name>GPL 3</name>
+      <url>http://www.gnu.org/licenses/gpl.txt</url>
+      <distribution>manual</distribution>
+      <comments>GNU General Public License version 3</comments>
+    </license>
+  </licenses>
+
+  <organization>
+    <name>Western Illinois University</name>
+    <url>http://www.wiu.edu</url>
+  </organization>
+
+  <developers>
+      <developer>
+          <id>rglaue</id>
+          <name>Russell E Glaue</name>
+          <email>re-glaue@wiu.edu</email>
+          <url>http://russ.glaue.org</url>
+          <organization>Center for the Application of Information Technologies, Western Illinois University</organization>
+          <organizationUrl>http://www.wiu.edu</organizationUrl>
+          <roles>
+              <role>project manager</role>
+              <role>architect</role>
+              <role>developer</role>
+          </roles>
+          <timezone>-5</timezone>
+      </developer>
+  </developers>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>2.0.2</version>
+        <configuration>
+          <source>1.5</source>
+          <target>1.5</target>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+
+  <dependencies>
+    <dependency>
+      <groupId>edu.wiu.sso.cas</groupId>
+      <artifactId>cas-client</artifactId>
+      <version>1.3</version>
+    </dependency>
+    <dependency>
+      <groupId>net.weblogic</groupId>
+      <artifactId>weblogic</artifactId>
+      <version>9.2.3</version>
+      <scope>system</scope>
+      <systemPath>${basedir}/weblogic/weblogic-9.2.3.jar</systemPath>
+    </dependency>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>3.8.1</version>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
+
+</project>

@@ -1,0 +1,176 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <title>CAS SSO Installation: Find the Source id and name for your institution</title>
+  <link href="/css/CodePin.css" rel="styleSheet" type="text/css">
+  <link href="/css/document.css" rel="styleSheet" type="text/css">
+</head>
+
+<body>
+
+
+<div class="headerWrapper"> 
+  <div class="headerItemLeft"> 
+    <h2> 
+      <a href="/project/cassso" target="_top">CAS SSO</a> |
+      <a href="/project/cassso/documentation.html" target="_top">Documentation</a> |
+      Installation
+    </h2> 
+  </div> 
+   
+  <div class="headerItemRight"> 
+    <h4> 
+      <a href="http://www.wiu.edu" target="_top">Western Illinois University</a> |
+      <a href="http://codepin.cait.org" target="_top">CodePin.org</a> 
+    </h4> 
+  </div> 
+</div> 
+ 
+ 
+<br clear="all"> 
+<hr size="1"> 
+<br clear="all"> 
+ 
+<div class="sideBarWrapper"> 
+  <div class="sideBarHeader"> 
+    <strong><a href="/project/cassso/">CAS SSO Project</a></strong> 
+  </div> 
+  <div class="sideBarBody"> 
+    <ul> 
+      <li> <a href="/project/cassso/index.html#about">About</a> 
+      <li> <a href="/project/cassso/index.html#requirements">Requirements</a> 
+    </ul> 
+  </div> 
+  <div class="sideBarHeader"> 
+    <strong><a href="/project/cassso/subprojects.html">CAS SSO Subprojects</a></strong> 
+  </div> 
+  <div class="sideBarBody"> 
+    <ul> 
+      <li> <a href="/project/cassso/subprojects.html#cas-client">cas-client</a> 
+      <li> <a href="/project/cassso/subprojects.html#cas-weblogic">cas-weblogic</a> 
+      <li> <a href="/project/cassso/subprojects.html#cas-blackboard">cas-blackboard</a> 
+    </ul> 
+  </div> 
+  <div class="sideBarHeader"> 
+    <strong><a href="/project/cassso/download.html">Download</a></strong> 
+  </div> 
+  <div class="sideBarBody"> 
+    <ul> 
+      <li> <a href="/project/cassso/license.html">License</a>    
+      <li> <a href="/project/cassso/download.html#dependencies">Dependencies</a> 
+      <li> <a href="/project/cassso/download.html#availability">Availability</a> 
+    </ul> 
+  </div> 
+  <div class="sideBarHeader"> 
+    <strong><a href="/project/cassso/documentation.html">Documentation</a></strong> 
+  </div> 
+  <div class="sideBarBody"> 
+    <ul> 
+      <li> <a href="/project/cassso/documentation.html#installation">Installation</a> 
+      <li> <a href="/project/cassso/documentation.html#api">Java API</a> 
+    </ul> 
+  </div> 
+  <hr size="1"> 
+  <hr size="1"> 
+  <div class="sideBarHeader"> 
+    <strong>Western Illinois University</strong> 
+  </div> 
+  <div class="sideBarBody"> 
+    <ul> 
+      <li> <a href="/project/cassso/sponsors.html#WIU">About WIU</a> 
+      <li> <a href="http://www.wiu.edu">WIU Web Site</a> 
+      <li> <a href="/project/cassso/sponsors.html#CAIT">About CAIT</a> 
+      <li> <a href="http://www.cait.org">CAIT Web Site</a> 
+    </ul> 
+  </div>
+</div>
+
+<div class="docWrapper">
+
+  <div class="navHeaderWrapper">
+    <span class="navHeaderLeft">
+        <a href="2.html">&lt;[Installing the CAS SSO Module]</a>
+    </span>
+    <span class="navHeaderCenter">
+        <a href="0.html">[Table of Contents]</a>
+    </span>
+    <span class="navHeaderRight">
+        <a href="4.html">[Constructing the URLs for CAS Validation]&gt;</a>
+    </span>
+  </div>
+
+  <a name="3.1"></a>
+  <h3 class="subHeading-1">Find the Source id and name for your institution</h3>
+
+  <a name="3.1.1"></a>
+  <p class="subHeading-2">About</p>
+
+  <p>Blackboard 8 supports many domains within a single installation, and many
+  institutions within a single domain. Each institution controls its own authentication
+  process with a module. So though you install the CAS module for the entire server, you
+  must activate it and configure it on a per-institution basis.</p>
+
+  <a name="3.1.2"></a>
+  <p class="subHeading-2">Finding the Source id and name</p>
+
+  <p>You need two values related to the institution of interest in order to setup the CAS
+  authentication. There are two ways to obtain the sourceid.id and sourceid.source
+  values. One is through the command line using siapi.sh. The other through the Web
+  Administration interface.</p>
+
+  <a name="3.1.2.1"></a>
+  <p class="subHeading-3">Using siapi.sh:</p>
+  <div class="textBox">
+  <div class="textBoxBody">
+  <code><pre>bash-3.00# ./siapi.sh printInstitutionIds
+
+Your environment has been set.
+
+Source=WebCT, ID=URN:X-WEBCT-VISTA-V1:75d7e9fe-8f2b-de2a-0123-4567899529a7
+ glcid=URN:X-WEBCT-VISTA-V1:75d7e9fe-8f2b-de2a-0123-4567899529a7 name=Western Illinois University
+
+bash-3.00#</pre></code>
+  </div>
+    <div class="textBoxCaption">
+      The printInstitutionIds command returns the glcid of the institution, as
+      well as the sourcedid.id and sourcedid.source of the institution.
+    </div>
+  </div>
+
+  <a name="3.1.2.2"></a>
+  <p class="subHeading-3">Using the Web Administration interface:</p>
+  <div class="textBox">
+  <div class="textBoxBody">
+  <table style="margin: 0; padding: 0; border-spacing: 0">
+  <tr><td style="border: 1px solid #999999; border-spacing: 0;">sourcedid.source:</td>
+      <td style="border: 1px solid #999999; border-spacing: 0">WebCT</td></tr>
+  <tr><td style="border: 1px solid #999999; border-spacing: 0">sourcedid.id:    </td>
+      <td style="border: 1px solid #999999; border-spacing: 0">URN:X-WEBCT-VISTA-V1:75d7e9fe-8f2b-de2a-0123-4567899529a7</td></tr>
+  </table>
+  </div>
+    <div class="textBoxCaption">
+      An alternate to finding the sourceid.source: Log on in the Domain Admin
+      role, go to Institutions, click on the ActionLink for the institution you
+      are interested in and choose "View Information"
+    </div>
+  </div>
+</div>
+
+
+<br clear="all"> 
+ 
+ 
+<div class="footerWrapper">
+<hr size="1" /> 
+<address class="copyright"> 
+<a href="http://codepin.cait.org">CodePin.org</a>,
+&copy; 2011
+<a href="http://www.cait.org">Center for the Application of Information Technologies</a>,
+<a href="http://www.wiu.edu">Western Illinois University</a> 
+</address>
+</div>
+
+</body>
+</html>

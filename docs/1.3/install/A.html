@@ -1,0 +1,376 @@
+<html>
+<head>
+  <title>CAS SSO Installation: Appendix A: WebLogic Server Dev Support</title>
+  <link href="/css/CodePin.css" rel="styleSheet" type="text/css">
+  <link href="/css/document.css" rel="styleSheet" type="text/css">
+</head>
+
+<style type="text/css">
+
+.externalPageWrapper .externalPageContent a:link,
+.externalPageWrapper .externalPageContent a:visited {
+	color: #0076CC; 
+	text-decoration: none; 
+}
+
+.externalPageWrapper .externalPageContent a:hover {
+	color: #0076CC; 
+	text-decoration: underline; 
+}
+
+.externalPageWrapper .externalPageContent {
+	margin-top: 0;
+	margin-right: 0;
+	margin-bottom: 0;
+	margin-left: 0;
+	padding: 0em;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 80%;
+	font-weight: normal;
+	color: #000000;
+	background-color: #FFFFFF;
+}
+.externalPageWrapper .externalPageContent p.pBody {
+	margin-bottom: 1%;
+}
+.externalPageWrapper .externalPageContent p {
+	margin-top: 0.1in; 
+	margin-right: 0.15in; 
+	margin-bottom: 0;
+	margin-left: 2%;
+	font-family: Verdana,Arial,Helvetica,sans-serif;
+	font-size: 10pt;
+	color: #000000;
+}
+.externalPageWrapper .externalPageContent h1.pChapHead,
+.externalPageWrapper .externalPageContent h1.pPartTitle,
+.externalPageWrapper .externalPageContent h2.pGlossHead,
+.externalPageWrapper .externalPageContent h1.topictitle1,
+.externalPageWrapper .externalPageContent h1.Title {
+	clear: left;
+	margin-top: 0;
+	margin-right: 0%;
+	margin-bottom: 1%;
+	margin-left: 2%;
+  	font-family: Arial, Helvetica, sans-serif;
+	font-weight: normal;
+	font-size: 2.5em;
+	color: black;
+}
+.externalPageWrapper .externalPageContent h2.pHeading1 {
+	clear: left;
+  color: black;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 2.5em;
+  font-style: normal;
+  font-variant: normal;
+  font-weight: normal;
+  margin-top: 0.2in;
+  margin-right: 0em;
+  margin-bottom: 1%;
+  	margin-left: 2%;
+  text-align: left;
+  text-decoration: none;
+  text-indent: 0em;
+  text-transform: none;
+}
+.externalPageWrapper .externalPageContent h3.pHeading2,
+.externalPageWrapper .externalPageContent h3.pRefObject {
+  color: black;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 1.9em;
+  font-style: normal;
+  font-variant: normal;
+  font-weight: normal;
+  margin-right: 0em;
+  margin-bottom: 1%;
+  	margin-left: 2%;
+  text-align: left;
+  text-decoration: none;
+  text-indent: 0em;
+  text-transform: none;
+}
+.externalPageWrapper .externalPageContent div.pSmartList1Bullet {
+	margin-top: 1em;
+	margin-right: 0;
+	margin-bottom: 1em;
+	margin-left: 2%;
+	text-align: left;
+	text-decoration: none;
+	text-transform: none;
+	list-style-type: square;
+}
+
+.externalPageWrapper .externalPageContent div.pSmartList1Bullet ul li {
+	margin-top: 1em;
+	margin-right: 0;
+	margin-bottom: 1em;
+	margin-left: 0;
+	text-align: left;
+	text-decoration: none;
+	text-transform: none;
+	list-style-type: square;
+}
+.externalPageWrapper .externalPageContent div.pPreformatted pre {
+  font-family: "Courier New", Courier, monospace;
+  font-size: 13px;
+  margin-top: 1em;
+  margin-bottom: 1%;
+  margin-left: 2%;
+}
+
+.externalPageWrapper .externalPageContent div.pPreformattedRelative pre {
+	font-family: "Courier New", Courier, monospace;
+	font-size: 13px;
+	font-style: normal;
+	font-variant: normal;
+	font-weight: normal;
+	margin-top: 1em;
+	margin-right: 0em;
+	margin-bottom: 1em;
+	text-align: left;
+	text-decoration: none;
+	text-indent: 0em;
+	text-transform: none;
+}
+.externalPageWrapper .externalPageContent table.Note {
+	margin-top: 0;
+	margin-bottom: 0em;
+	margin-left: 2%;
+}
+.externalPageWrapper .externalPageContent code.cCode
+{
+  font-family: "Courier New", Courier, monospace;
+}
+.externalPageWrapper .externalPageContent code.cCodeBold
+{
+  font-family: "Courier New", Courier, monospace;
+  font-weight: bold;
+}
+
+.externalPageWrapper .externalPageContent code.cCodeEmphasis
+{
+  font-family: "Courier New", Courier, monospace;
+  font-style: italic;
+}
+</style>
+
+<body>
+
+
+<div class="headerWrapper"> 
+  <div class="headerItemLeft"> 
+    <h2> 
+      <a href="/project/cassso" target="_top">CAS SSO</a> |
+      <a href="/project/cassso/documentation.html" target="_top">Documentation</a> |
+      Installation
+    </h2> 
+  </div> 
+   
+  <div class="headerItemRight"> 
+    <h4> 
+      <a href="http://www.wiu.edu" target="_top">Western Illinois University</a> |
+      <a href="http://codepin.cait.org" target="_top">CodePin.org</a> 
+    </h4> 
+  </div> 
+</div> 
+ 
+ 
+<br clear="all"> 
+<hr size="1"> 
+<br clear="all"> 
+ 
+<div class="sideBarWrapper"> 
+  <div class="sideBarHeader"> 
+    <strong><a href="/project/cassso/">CAS SSO Project</a></strong> 
+  </div> 
+  <div class="sideBarBody"> 
+    <ul> 
+      <li> <a href="/project/cassso/index.html#about">About</a> 
+      <li> <a href="/project/cassso/index.html#requirements">Requirements</a> 
+    </ul> 
+  </div> 
+  <div class="sideBarHeader"> 
+    <strong><a href="/project/cassso/subprojects.html">CAS SSO Subprojects</a></strong> 
+  </div> 
+  <div class="sideBarBody"> 
+    <ul> 
+      <li> <a href="/project/cassso/subprojects.html#cas-client">cas-client</a> 
+      <li> <a href="/project/cassso/subprojects.html#cas-weblogic">cas-weblogic</a> 
+      <li> <a href="/project/cassso/subprojects.html#cas-blackboard">cas-blackboard</a> 
+    </ul> 
+  </div> 
+  <div class="sideBarHeader"> 
+    <strong><a href="/project/cassso/download.html">Download</a></strong> 
+  </div> 
+  <div class="sideBarBody"> 
+    <ul> 
+      <li> <a href="/project/cassso/license.html">License</a>    
+      <li> <a href="/project/cassso/download.html#dependencies">Dependencies</a> 
+      <li> <a href="/project/cassso/download.html#availability">Availability</a> 
+    </ul> 
+  </div> 
+  <div class="sideBarHeader"> 
+    <strong><a href="/project/cassso/documentation.html">Documentation</a></strong> 
+  </div> 
+  <div class="sideBarBody"> 
+    <ul> 
+      <li> <a href="/project/cassso/documentation.html#installation">Installation</a> 
+      <li> <a href="/project/cassso/documentation.html#api">Java API</a> 
+    </ul> 
+  </div> 
+  <hr size="1"> 
+  <hr size="1"> 
+  <div class="sideBarHeader"> 
+    <strong>Western Illinois University</strong> 
+  </div> 
+  <div class="sideBarBody"> 
+    <ul> 
+      <li> <a href="/project/cassso/sponsors.html#WIU">About WIU</a> 
+      <li> <a href="http://www.wiu.edu">WIU Web Site</a> 
+      <li> <a href="/project/cassso/sponsors.html#CAIT">About CAIT</a> 
+      <li> <a href="http://www.cait.org">CAIT Web Site</a> 
+    </ul> 
+  </div>
+</div>
+
+<div class="docWrapper">
+
+  <div class="navHeaderWrapper">
+    <span class="navHeaderLeft">
+        <a href="5.html">&lt;[Frequently Asked Questions]</a>
+    </span>
+    <span class="navHeaderCenter">
+        <a href="0.html">[Table of Contents]</a>
+    </span>
+    <span class="navHeaderRight">
+        <a href="1.html">[CAS Validation and Blackboard 8]&gt;</a>
+    </span>
+  </div>
+
+  <a name="A.1"></a>
+  <h3 class="subHeading-1">Appendix A: WebLogic Server Dev Support</h3>
+</div>
+
+<div class="externalPageWrapper">
+  <a name="A.1.1"></a>
+  <div class="externalPageContent">
+
+<h2 class="pHeading1"><a name="wp1069994"> </a>
+When to Use the weblogic.jar and wlfullclient.jar Files
+</h2>
+
+<p class="pBody"><a name="wp1072467"> </a>
+The following sections provide information on how to use the <code class="cCode">weblogic.jar and wlfullclient.jar</code> files:
+</p>
+
+<div class="pSmartList1Bullet"><ul>
+<li><a name="wp1072530"> </a><a href="#wp1072491">Client-side Applications</a></li>
+<li><a name="wp1072542"> </a><a href="#wp1072435">Server-side Operations</a></li>
+</ul></div>
+
+<h3 class="pHeading2"><a name="wp1072491"> </a>
+Client-side Applications
+</h3>
+
+<p class="pBody"><a name="wp1072401"> </a>
+Prior to WebLogic Server 10.0, the <code class="cCode">weblogic.jar</code> file was required for T3 and WLS-IIOP client applications to provide WebLogic Server-specific value-added features. For WebLogic Server 10.x and later releases, client applications requiring these features should use the <code class="cCode">wlfullclient.jar</code> file instead of the <code class="cCode">weblogic.jar</code>. See <a href="basics.html#wp1066820">Client Types and Features</a> for more information on client types, features, and class requirements.
+</p>
+
+<p class="pBody"><a name="wp1071390"> </a>
+You can generate the <code class="cCode">wlfullclient.jar</code> file for client applications using the JarBuilder tool. See <a href="#wp1074758">Using the WebLogic JarBuilder Tool</a>.
+</p>
+
+<a name="wp1072512"> </a>
+
+<table class="Note">
+<tbody><tr>
+<td valign="top"><strong>Note:</strong></td>
+<td>Continuing to use <code class="cCode">weblogic.jar</code> in client-side applications may result in a <code class="cCode">ClassNotFoundException</code>.</td>
+</tr>
+</tbody></table>
+
+<h3 class="pHeading2"><a name="wp1072435"> </a>
+Server-side Operations
+</h3>
+
+<p class="pBody"><a name="wp1072547"> </a>
+Server-side operations continue to require a complete WebLogic Server installation, which includes the <code class="cCode">weblogic.jar</code>. Typical operations requiring a complete WebLogic Server installation are:
+</p>
+
+<div class="pSmartList1Bullet"><ul>
+<li><a name="wp1072449"> </a>Operations necessary for development purposes, such as the <code class="cCode">ejbc</code> compiler.</li>
+<li><a name="wp1072450"> </a>Administrative operations such as deployment.</li>
+</ul></div>
+
+  </div>
+  <div class="externalPageUrl">
+      Reference: <a href="http://download.oracle.com/docs/cd/E12840_01/wls/docs103/client/basics.html#wp1069994">http://download.oracle.com/docs/cd/E12840_01/wls/docs103/client/basics.html#wp1069994</a>  (as of: 2011-02-21)
+  </div>
+
+<br><br>
+
+  <a name="A.1.2"></a>
+  <div class="externalPageContent">
+
+<br>
+
+<h1 class="pChapHead"><a name="wp1074758"> </a> 
+Using the WebLogic JarBuilder Tool
+</h1> 
+<p class="pBody"><a name="wp1077240"> </a> 
+The following sections provide information on creating the <code class="cCode">wlfullclient.jar</code> using the WebLogic JarBuilder tool:
+</p> 
+<div class="pSmartList1Bullet"><ul> 
+<li><a name="wp1078176"> </a><a href="#wp1078098">Creating a wlfullclient.jar for JDK 1.6 client applications</a></li> 
+<li><a name="wp1078184"> </a><a href="#wp1078122">Creating a wlfullclient5.jar for JDK 1.5 client applications</a></li> 
+</ul></div> 
+<p class="pBody"><a name="wp1078546"> </a> .externalPageWrapper .externalPageContent 
+For information on when to use the <code class="cCode">wlfullclient.jar</code>, see <a href="#wp1069994">When to Use the weblogic.jar and wlfullclient.jar Files</a> 
+</p> 
+<p>&nbsp;</p> 
+<hr noshade="noshade"/> 
+<h2 class="pHeading1"><a name="wp1078098"> </a> 
+Creating a wlfullclient.jar for JDK 1.6 client applications
+</h2><p class="pBody"><a name="wp1078097"> </a> 
+Use the following steps to create a <code class="cCode">wlfullclient.jar</code> file for a JDK 1.6 client application:
+</p> 
+<div class="pSmartList1"><ol type="1" class="pSmartList1"> 
+<li><a name="wp1077767"> </a>Change directories to the <code class="cCode">server/lib</code> directory.</li> 
+<a name="wp1077745"> </a><div class="pPreformattedRelative"><pre>cd <code class="cCodeEmphasis">WL_HOME</code>/server/lib</pre></div><li><a name="wp1077747"> </a>Use the following command to create <code class="cCode">wlfullclient.jar</code> in the <code class="cCode">server/lib</code> directory:</li> 
+<a name="wp1077749"> </a><div class="pPreformattedRelative"><pre>java -jar wljarbuilder.jar</pre></div><li><a name="wp1077751"> </a>You can now copy and bundle the <code class="cCode">wlfullclient.jar</code> with client applications. </li> 
+<li><a name="wp1077880"> </a>Add the <code class="cCode">wlfullclient.jar</code> to the client application&#8217;s <code class="cCode">classpath</code>.</li> 
+</ol></div> 
+<p>&nbsp;</p> 
+<hr noshade="noshade"/> 
+<h2 class="pHeading1"><a name="wp1078122"> </a> 
+Creating a wlfullclient5.jar for JDK 1.5 client applications
+</h2><div class="pSmartList1"><ol type="1" class="pSmartList1"> 
+<li><a name="wp1078130"> </a>Change directories to the <code class="cCode">server/lib</code> directory.</li> 
+<a name="wp1078131"> </a><div class="pPreformattedRelative"><pre>cd <code class="cCodeEmphasis">WL_HOME</code>/server/lib</pre></div><li><a name="wp1078167"> </a>Use the following command to create <code class="cCode">wlfullclient.jar</code> in the <code class="cCode">server/lib</code> directory:</li> 
+<a name="wp1078168"> </a><div class="pPreformattedRelative"><pre>java -jar wljarbuilder.jar -profile wlfullclient5 </pre></div><li><a name="wp1078169"> </a>You can now copy and bundle the <code class="cCode">wlfullclient5.jar</code> with client applications. </li> 
+<li><a name="wp1078135"> </a>Add the <code class="cCode">wlfullclient5.jar</code> to the client application&#8217;s <code class="cCode">classpath</code>.</li> 
+</ol></div> 
+
+  </div>
+  <div class="externalPageUrl">
+    Reference: <a href="http://download.oracle.com/docs/cd/E12840_01/wls/docs103/client/jarbuilder.html">http://download.oracle.com/docs/cd/E12840_01/wls/docs103/client/jarbuilder.html</a> (as of: 2011-02-21)
+  </div>
+</div>
+
+
+<br clear="all"> 
+ 
+ 
+<div class="footerWrapper">
+<hr size="1" /> 
+<address class="copyright"> 
+<a href="http://codepin.cait.org">CodePin.org</a>,
+&copy; 2011
+<a href="http://www.cait.org">Center for the Application of Information Technologies</a>,
+<a href="http://www.wiu.edu">Western Illinois University</a> 
+</address>
+</div>
+
+</body>
+</html>

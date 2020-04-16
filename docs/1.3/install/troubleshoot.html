@@ -1,0 +1,26 @@
+<html>
+<body>
+<pre>
+TroubleShooting
+
+Testing the Blackboard 8 CAS SSO Auth module in stages (taken from The Powerlinks developers network FAQ)
+
+How do I know whether an authentication module is properly deployed?
+
+1. Does the module show up in institution-level administration, under the "System Integration" Column?
+
+2. Has the deployable component been enabled on the institutional-level administration?
+
+3. Has the "Master Switch" for deployable components been enabled (also in server-level administration, under the "Deployable Components" settings group)
+
+4. Has the Default SSO Institution been specified?
+
+5. Can you hit your deployable component from a browser, by going to the URL
+
+http://<vista_host_and_port>/webct/urw/ss<url_pattern>.si<ims_id>.sn<ims_name>
+
+? (Note: the authentication attempt will probably fail, but you should see in the log whether or not the request is reaching your AuthModule) 
+<pre>
+</body>
+</html>
+
